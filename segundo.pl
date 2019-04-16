@@ -13,16 +13,16 @@ alojamiento(tacna,albergue,25).
 
 viaje(Ciudad,Dias,Alojamiento):- pasaje(Ciudad,X),alojamiento(Ciudad,Alojamiento,L),R is X+L*Dias,write(R).
 
-comparar(G,R):-mayor1(S), G<S, R is S.
-comparar(G,R):-mayor1(S), G=:=S, R is S.
-comparar(G,R):-mayor1(S), G>S, R is G.
+comparar(G,R):-mayor1(S), G<S, comparar(S,R).
+comparar(G,R):-mayor1(S), G=:=S, R is G.
+comparar(G,R):-mayor1(S), G>S,  comparar(G,R).
 
 mayor1(G):- pasaje(Ciudad,X),alojamiento(Ciudad,_,L),G is X+L*3.
 mayor:- mayor1(G),comparar(G,R),write(R),!.
 
-comparar1(G,R):-menor1(S), G<S, R is G.
-comparar1(G,R):-menor1(S), G=:=S, R is S.
-comparar1(G,R):-menor1(S), G>S, R is S.
+comparar1(G,R):-menor1(S), G>S, comparar1(S,R).
+comparar1(G,R):-menor1(S), G==S, R is G.
+comparar1(G,R):-menor1(S), G<S, comparar1(G,R).
 
 menor1(G):- pasaje(Ciudad,X),alojamiento(Ciudad,_,L),G is X+L*5.
 menor:- menor1(G),comparar1(G,R),write(R),!.
