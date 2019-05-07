@@ -14,7 +14,7 @@ menu:-
     write('10.FIBONACCI'),nl,
     write('11.LISTAS'),nl,
     write('12.LOGARITMOS'),nl,
-    write('13.CAMBIO'),nl,
+    write('13.CAMBIO DE BASE 10'),nl,
     write('14.SUMA DE GAUSS'),nl,
     write('15.BORRA'),nl,
     write('16.Cerrar programa'),nl,
@@ -137,17 +137,34 @@ fibonacci:-
     write('-------------------------------------------------------'),nl,
     write('-------------------------------------------------------'),nl,
     nl,nl.
-%!  LISTAS
+listas:-
+    write('-------------------------------------------------------'),nl,
+    write('Lista'),nl,
+    write('Escriba el número de elementos en la lista: '),read(N),nl,
+    listar(N,_),nl,
+    write('-------------------------------------------------------'),nl,
+    write('-------------------------------------------------------'),nl,
+    nl,nl.
+
 logaritmos:-
     write('-------------------------------------------------------'),nl,
-    write('Logaritmo Neperiano'),nl,
+    write('Logaritmos'),nl,
     write('Escriba el número: '),read(N),nl,
-    R is log(N),
+    write('Escriba la base: '),read(M),nl,
+    R is (log(N)/log(M)),
     write('->>El resultado es: '), write(R),nl,
     write('-------------------------------------------------------'),nl,
     write('-------------------------------------------------------'),nl,
     nl,nl.
-%!  Cambio
+cambio:-
+    write('-------------------------------------------------------'),nl,
+    write('Cambio de base 10 a base destino'),nl,
+    write('Escriba el número: '),read(N),nl,
+    write('Escriba la base de destino: '),read(M),nl,
+    write('->>El resultado es: '),base(N,M),nl,
+    write('-------------------------------------------------------'),nl,
+    write('-------------------------------------------------------'),nl,
+    nl,nl.
 gauss:-
     write('-------------------------------------------------------'),nl,
     write('Sumatoria de Gauss'),nl,
@@ -187,6 +204,13 @@ fibonacci(N,X) :-
     N2 is N-2,
     fibonacci(N2,X2),
     X is X1+X2,!.
+
+base(N,B):-N<B,write(N),!.
+base(N,B):-N>B, N1 is N//B,R is N mod B ,base(N1,B),write(R).
+
+agregar(X,L1,[X|L1]).
+listar(0,L):- write('->>El resultado es: '),write(L),!.
+listar(Nv,L):- Nv1 is Nv-1,write('Agrega un número: '),nl,read(N),agregar(N,L,L2),listar(Nv1,L2).
 
 
 
